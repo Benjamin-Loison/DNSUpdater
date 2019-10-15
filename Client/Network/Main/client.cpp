@@ -37,7 +37,7 @@
 // 1000 * 60: every minute
 #define DNS_IP "lemnoslife.com"
 // or domain
-#define SERVER_PORT 12345
+#define SERVER_PORT 57563
 // first digits of CRC32 of DNSUpdater ;)
 using namespace std;
 
