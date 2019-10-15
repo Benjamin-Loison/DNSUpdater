@@ -35,6 +35,7 @@
 #define WEBSITE_IP "http://myexternalip.com/raw"
 #define MS_TO_WAIT 60000
 // 1000 * 60: every minute
+#define US_TO_WAIT 60000000
 #define DNS_IP "lemnoslife.com"
 // or domain
 #define SERVER_PORT 57563
@@ -111,6 +112,8 @@ void checkIPChange()
         }
         #ifdef _WIN32
             Sleep(MS_TO_WAIT);
+        #elif __linux__
+            usleeep(US_TO_WAIT);
         #endif
     }
 }
