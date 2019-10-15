@@ -108,6 +108,7 @@ void checkIPChange()
         string currentIP = getIP();
         if(currentIP != lastIP)
         {
+            lastIP = currentIP;
             writeIP();
         }
         #ifdef _WIN32
