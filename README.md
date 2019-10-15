@@ -4,3 +4,6 @@ Free alternative (if you have a computer to run constantly the client side and a
 Think about using Task Scheduler for instance on Windows and crontab on Linux to start this program on computer start.
 
 Could add security with check if auth failed more than 100 times with an IP then do a blacklist (in memory, without using files).
+
+Client side was tested on Debian (Linux) and also Windows 10
+Server side was only tested on Debian.
