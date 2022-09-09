@@ -32,7 +32,7 @@
 #include <limits>
 #define NETWORK_LENGTH 1000000
 #define PASSWORD "A_PASSWORD"
-#define WEBSITE_IP "http://myexternalip.com/raw"
+#define WEBSITE_IP "https://ifconfig.me"
 #define MS_TO_WAIT 60000
 // 1000 * 60: every minute
 #define US_TO_WAIT 60000000
@@ -61,6 +61,8 @@ string getIP()
     CURL *curl = curl_easy_init();
     string got;
     curl_easy_setopt(curl, CURLOPT_URL, WEBSITE_IP);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 1);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &got);
     curl_easy_perform(curl);
