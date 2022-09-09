@@ -17,7 +17,7 @@
     #define SOCKET int
     #define SOCKADDR_IN struct sockaddr_in
 #endif
-#include <curl.h>
+#include <curl/curl.h>
 #include <cstdio>
 #include <thread>
 #include <string>
@@ -36,18 +36,19 @@
 #define MS_TO_WAIT 60000
 // 1000 * 60: every minute
 #define US_TO_WAIT 60000000
-#define DNS_IP "lemnoslife.com"
+#define DNS_IP "dns.lemnoslife.com"
 // or domain
 #define SERVER_PORT 57563
 // first digits of CRC32 of DNSUpdater ;)
 using namespace std;
 
-void initializeNetwork(), init(), connection(), closeConnection();
+void initializeNetwork(), init(), closeConnection();
 SOCKET socketId;
 SOCKADDR_IN destination;
 char buffere[NETWORK_LENGTH] = "";
 vector<string> msg;
 string lastIP = "", lastIPFilePath = "";
+bool connection();
 
 size_t writeCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
@@ -97,7 +98,18 @@ void checkIPChange()
 {
     lastIPFilePath = ext + "lastIP.txt";
     if(file_exists(lastIPFilePath)) // assume no user changes inside the first line of the file
-        lastIP = getFileContent(lastIPFilePath)[0];
+    {
+        vector<string> lines = getFileContent(lastIPFilePath); // used to crash when forcing [0]
+        unsigned short linesSize = lines.size();
+        if(linesSize >= 1)
+            lastIP = lines[0];
+        else
+        {
+            print("lastIPFilePath (" + lastIPFilePath + ") hasn't any line !");
+            lastIP = getIP();
+            writeIP();
+        }
+    }
     else
     {
         lastIP = getIP();
@@ -114,7 +126,7 @@ void checkIPChange()
         #ifdef _WIN32
             Sleep(MS_TO_WAIT);
         #elif __linux__
-            usleeep(US_TO_WAIT);
+            usleep(US_TO_WAIT);
         #endif
     }
 }
@@ -140,25 +152,30 @@ void init()
     }
 
     destination.sin_port = htons(SERVER_PORT);
-    connection();
-    print("Network is loaded !");
-    checkIPChange();
+    if(connection())
+    {
+        print("Network is loaded !");
+        checkIPChange();
+    }
+    else
+    {
+        exitWithMessage("Server not connected");
+    }
     closeConnection();
+
 }
 
 void sendStr(string str)
 {
     str += "#";
-    print("Sent !");
-    //print("Send: " + str);
+    print("Send: " + str + " !");
     strcpy(buffere, str.c_str());
     send(socketId, buffere, strlen(buffere), 0);
 }
 
-void connection()
+bool connection()
 {
-    if(connect(socketId, (struct sockaddr*)&destination, sizeof(destination)) != 0)
-        exitWithMessage("Server not connected");
+    return connect(socketId, (struct sockaddr*)&destination, sizeof(destination)) == 0;
 }
 
 void closeConnection()
