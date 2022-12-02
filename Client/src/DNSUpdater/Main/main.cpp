@@ -3,6 +3,7 @@
 #include <iostream>
 #include "../../Logger/logger.h"
 #include "../../Network/Main/client.h"
+#include "../../FilePlus/file_plus.h"
 #include "../../StringPlus/string_plus.h"
 #include <string>
 #include <thread>
@@ -32,6 +33,8 @@ string name = "DNSUpdater",
 int main()
 {
     initializeLogger();
+    if(!directoryExists(ext))
+        createDirectory(logFolder);
     initializeNetwork();
 
     return 0;

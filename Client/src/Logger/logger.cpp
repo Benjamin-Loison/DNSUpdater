@@ -12,13 +12,14 @@
 using namespace std;
 
 void print(string);
-string logPath = "";
+string logFolder = "", logPath = "";
 ofstream logFile;
 FILE* file;
 
 void initializeLogger()
 {
-    logPath = ext + "Logger" + pathSeparator + "Logs" + pathSeparator + getDate() + ".log";
+    logFolder = ext + "Logger" + pathSeparator + "Logs" + pathSeparator;
+    logPath = logFolder + getDate() + ".log";
 }
 
 void display(string toDisplay)

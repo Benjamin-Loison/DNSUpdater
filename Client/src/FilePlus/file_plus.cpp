@@ -31,6 +31,8 @@ bool createOneDirectory(string path)
 
 bool createDirectory(string path)
 {
+    if(endsWith(path, pathSeparatorStr))
+        path = path.substr(0, path.length() - pathSeparatorStr.length());
     vector<string> directories = split(path, pathSeparatorStr.c_str());
     string directory = "";
     for(unsigned int i = 0; i < directories.size(); i++)
