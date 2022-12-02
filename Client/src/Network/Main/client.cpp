@@ -42,7 +42,7 @@
 // first digits of CRC32 of DNSUpdater ;)
 using namespace std;
 
-void initializeNetwork(), init(), closeConnection();
+void initializeNetwork(), checkIPChange(), sendIP(), closeConnection();
 SOCKET socketId;
 SOCKADDR_IN destination;
 char buffere[NETWORK_LENGTH] = "";
@@ -72,7 +72,7 @@ string getIP()
 
 void initializeNetwork()
 {
-    init();
+    checkIPChange();
 }
 
 bool isAnIPv4(string potentialIP)
@@ -108,22 +108,18 @@ void checkIPChange()
         else
         {
             print("lastIPFilePath (" + lastIPFilePath + ") hasn't any line !");
-            lastIP = getIP();
-            writeIP();
+            lastIP = "";
         }
     }
     else
-    {
-        lastIP = getIP();
-        writeIP();
-    }
+        lastIP = "";
     while(true)
     {
         string currentIP = getIP();
         if(currentIP != lastIP)
         {
             lastIP = currentIP;
-            writeIP();
+            sendIP();
         }
         #ifdef _WIN32
             Sleep(MS_TO_WAIT);
@@ -133,7 +129,7 @@ void checkIPChange()
     }
 }
 
-void init()
+void sendIP()
 {
     #ifdef _WIN32
         WSADATA initWin32;
@@ -157,7 +153,7 @@ void init()
     if(connection())
     {
         print("Network is loaded !");
-        checkIPChange();
+        writeIP();
     }
     else
     {
