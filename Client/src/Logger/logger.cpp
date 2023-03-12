@@ -11,10 +11,8 @@
 #include <string>
 using namespace std;
 
-void print(string);
 string logFolder = "", logPath = "";
 ofstream logFile;
-FILE* file;
 
 void initializeLogger()
 {

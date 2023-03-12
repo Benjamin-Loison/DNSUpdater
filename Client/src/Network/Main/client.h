@@ -4,7 +4,6 @@
 #include <thread>
 #include <string>
 
-extern std::thread network;
 void initializeNetwork(), sendStr(std::string), closeConnection(), freeNetwork();
 
 #endif

@@ -30,7 +30,6 @@
 #include "../Logger/logger.h" 
 #include "../StringPlus/string_plus.h"
 #include "../FilePlus/file_plus.h"
-#include "../MathPlus/math_plus.h"
 #include "../Date/date.h"
 #include <unistd.h>
 // first digits of CRC32 "DNSUpdater"
@@ -50,7 +49,7 @@ using namespace std;
 void connectEvent(), receive(SOCKET, string, string), closeConnection(), manageMsg(string*, SOCKET, string, string);
 map<SOCKET, tuple<bool, string, unsigned short>> clients;
 map<SOCKET, thread> threads; 
-SOCKET socketId, getSocketFromIpPort(string, unsigned short); 
+SOCKET socketId;
 SOCKADDR_IN source; 
 
 void initializeNetwork() 
@@ -218,14 +217,6 @@ void manageMsg(string *msg, SOCKET client, string ip, string port)
             break; 
     } 
 } 
-
-SOCKET getSocketFromIpPort(string ipv4, unsigned short port)
-{
-    for(map<SOCKET, tuple<bool, string, unsigned short>>::iterator it = clients.begin(); it != clients.end(); it++)
-        if(get<IP>(it->second) == ipv4 && get<PORT>(it->second) == port)
-            return it->first;
-    return -1;
-}
 
 void closeConnection() 
 { 

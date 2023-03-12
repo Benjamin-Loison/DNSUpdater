@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-bool createDirectory(std::string), directoryExists(std::string), file_exists(std::string), writeFile(std::string, std::string, std::string), writeFile(std::string, std::string, std::vector<std::string>);
+bool createDirectory(std::string), directoryExists(std::string), writeFile(std::string, std::string, std::vector<std::string>);
 std::vector<std::string> getFileContent(std::string);
 
 #endif

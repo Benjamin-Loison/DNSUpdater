@@ -62,13 +62,7 @@ bool directoryExists(string path)
     return false;
 }
 
-// does several includes of the same file are done ? ie: here we include something.h and anotherSomething.h and in aniot
-
-bool file_exists(string name) // works with directory ?
-{
-    struct stat buffer;
-    return stat(name.c_str(), &buffer) == 0;
-}
+// does several includes of the same file are done ? ie: here we include something.h and anotherSomething.h and in aniot - aniot?
 
 vector<string> getFileContent(string path)
 {

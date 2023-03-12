@@ -4,7 +4,6 @@
 #include <string>
 
 std::string getDate();
-unsigned long getMillis();
 
 #endif
 

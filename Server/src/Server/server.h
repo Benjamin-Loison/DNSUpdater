@@ -18,7 +18,6 @@
 #include <string>
 
 void initializeNetwork(), freeNetwork();
-extern std::thread connection;
 
 #endif
 

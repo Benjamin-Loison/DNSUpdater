@@ -23,10 +23,3 @@ string getNbZero(int number)
         return "0" + strNb;
     return strNb;
 }
-
-unsigned long getMillis()
-{
-	timeval curTime;
-	gettimeofday(&curTime, NULL);
-	return time(0) + curTime.tv_usec / 1000;
-}

@@ -2,7 +2,7 @@
 #include "../Logger/logger.h"
 using namespace std;
 
-string ext, dir, name = "DNSUpdater";
+string ext, name = "DNSUpdater";
 bool DEBUG = true;
 string pathSeparatorStr =
 #ifdef _WIN32

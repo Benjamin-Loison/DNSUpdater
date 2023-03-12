@@ -4,6 +4,6 @@
 #include <string>
 
 extern std::string logFolder;
-void initializeLogger(), print(std::string = ""), write(std::string), display(std::string), exitWithMessage(std::string);
+void initializeLogger(), print(std::string = ""), exitWithMessage(std::string);
 
 #endif

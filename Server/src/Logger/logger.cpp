@@ -26,11 +26,6 @@ void initializeLogger()
     archive("Archive file:");
 }
 
-void print(int toLog)
-{
-    print(convertNbToStr<int>(toLog));
-}
-
 string iso8859_1ToUtf8(string &str)
 {
     string strOut;
@@ -74,25 +69,4 @@ void debug(string toDebug)
 void archive(string toArchive)
 {
     print(toArchive/*, archivePath*/);
-}
-
-void exitWithMessage(string message)
-{
-    print("The game has crashed:"); // can produce crash before and hide message next line ?
-    print(message);
-    //free(); // TODO:
-}
-
-void print(map<string, string> mapToPrint)
-{
-    string linesToPrint;
-    for(map<string, string>::const_iterator iterator = mapToPrint.begin(); iterator != mapToPrint.end(); iterator++)
-    {
-        linesToPrint += iterator->first + "=" + iterator->second + "\n";
-    }
-    print(linesToPrint);
-}
-
-void freeLogger()
-{
 }

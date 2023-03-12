@@ -3,7 +3,7 @@
 
 #include <string>
 
-extern std::string ext, dir, name, pathSeparatorStr;
+extern std::string ext, pathSeparatorStr;
 extern char pathSeparator;
 extern bool DEBUG;
 

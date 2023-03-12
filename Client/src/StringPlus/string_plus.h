@@ -4,17 +4,12 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <map>
 
 std::vector<std::string> split(std::string, std::string);
-std::string replace(std::string, const std::string&, const std::string&), replaceAll(std::string, const std::string&, const std::string&),
-            convertDoubleToStr(double);
+std::string replace(std::string, const std::string&, const std::string&);
 int convertStrToInt(std::string);
-double convertStrToDouble(std::string);
-bool isANumber(std::string), isAnInteger(std::string), isAnInteger(double), startsWith(std::string, std::string), endsWith(const std::string&, const std::string&),
-     contains(std::string, std::string), contains(std::string, char);
+bool isAnInteger(std::string), endsWith(const std::string&, const std::string&);
 long convertStrToLong(std::string);
-
 
 template<typename T>
 std::string convertNbToStr(const T& number)
