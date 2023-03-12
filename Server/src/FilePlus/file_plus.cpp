@@ -80,32 +80,6 @@ vector<string> getFileContent(string path)
     return vec;
 }
 
-vector<string> listFiles(string directory, string extension, bool withDirectory)
-{
-    #ifdef _WIN32
-        WIN32_FIND_DATA findData;
-        HANDLE hFind;
-        string fileLookingFor = directory + "*" + extension;
-        hFind = FindFirstFile(fileLookingFor.c_str(), &findData);
-        vector<string> files;
-        if(hFind == INVALID_HANDLE_VALUE)
-            return files;
-        do
-        {
-            string fileName = findData.cFileName;
-            if(withDirectory)
-            {
-                 files.push_back(directory + fileName);
-            }
-            else
-            {
-                 files.push_back(fileName);
-            }
-        } while(FindNextFile(hFind, &findData) > 0);
-        return files;
-    #endif
-}
-
 bool writeFile(string filePath, string option, string toWrite)
 {
     FILE* file = fopen(filePath.c_str(), option.c_str());
